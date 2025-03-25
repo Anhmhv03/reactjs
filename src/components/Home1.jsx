@@ -61,6 +61,48 @@ export const Bai3 = () => {
   );
 };
 
+export const Bai4 = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  return (
+    <div>
+      <h1>Danh sách người dùng:</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <strong>👤 {user.name}</strong> <br />
+            ✉️ Email: {user.email} <br />
+            📞 Phone: {user.phone}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export const Bai5 = () => {
+  const [count, setCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
+
+  useEffect(() => {
+    setRenderCount((prev) => prev + 1);
+  }, [count]);
+
+  return (
+    <div>
+      <h1>Giá trị: {count}</h1>
+      <h2>Số lần re-render: {renderCount}</h2>
+      <button onClick={() => setCount(count + 1)}>Tăng</button>
+    </div>
+  );
+};
+
 export const Times = (start_time, end_time) => {
   // lay gio phut
   const now = new Date();
@@ -89,7 +131,7 @@ export const Times = (start_time, end_time) => {
 };
 
 const start_time = "23:15";
-const end_time = "19:00";
+const end_time = "2:00";
 console.log(
   Times(start_time, end_time) ? "Phim đang chiếu" : "Phim không chiếu"
 );
